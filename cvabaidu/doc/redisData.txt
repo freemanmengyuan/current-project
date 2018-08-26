@@ -1,0 +1,306 @@
+数据字典：
+
+一、getBoardStock.php
+1、板块的价格数据（全库）
+  结构：
+        hash
+  key：
+        $bid_info | Y（年度）, $bid包含行业板块、概念板块
+  value：
+        二维数组，20171208为子key
+        [
+            ...
+            20171207 => [
+                   $boardArr[2], //名称
+                   $bpercent, //涨跌幅
+                   $boardArr[4], //成交量
+                   $boardArr[5],  //换手率
+                   $boardArr[18],  //当前价格
+                   $boardArr[19], //涨跌数
+                   $boardArr[6], //涨跌股票数
+            ],
+            20171208 => [
+                   $boardArr[2], //名称
+                   $bpercent, //涨跌幅
+                   $boardArr[4], //成交量
+                   $boardArr[5],  //换手率
+                   $boardArr[18],  //当前价格
+                   $boardArr[19], //涨跌数
+                   $boardArr[6], //涨跌股票数
+            ],
+            ...
+        ]
+
+2、行业/概念板块当日数据（最新库）
+  结构：
+        string
+  key：
+        industry：行业板块
+        concept：概念板块
+  value：
+        二维数组，$bid（板块id）为子key
+        [
+            ...
+            B12345 => [
+                   $boardArr[2], //名称
+                   $bpercent, //涨跌幅
+                   $boardArr[4], //成交量
+                   $boardArr[5],  //换手率
+                   $boardArr[18],  //当前价格
+                   $boardArr[19], //涨跌数
+                   $boardArr[6], //涨跌股票数
+            ],
+            B56789 => [
+                   $boardArr[2], //名称
+                   $bpercent, //涨跌幅
+                   $boardArr[4], //成交量
+                   $boardArr[5],  //换手率
+                   $boardArr[18],  //当前价格
+                   $boardArr[19], //涨跌数
+                   $boardArr[6], //涨跌股票数
+            ],
+            ...
+        ]
+
+3、股票所属板块（全库）
+  结构：
+        string
+  key：
+        $stockId_board
+  value：
+        一维数组，$bid（板块id）为子key
+        [
+            ...
+            B12345,
+            B56789,
+            ...
+        ]
+4、板块包含的所有股票（全库）
+  结构：
+        string
+  key：
+        industry_$bid_stock 或者
+        concept_$bid_stock
+  value：
+        一维数组
+        [
+            ...
+            sh600036,
+            ...
+        ]
+
+二、getStockIncome
+
+1、单个股票财务数据（全库）
+  结构：
+        string
+  key：
+        $stockId_income
+  value：
+        二维数组，报告日期Ymd为子key
+        [
+            ...
+            20170630 => [
+                    $stock[2], //每股收益
+                    $stock[4], //营业收入，单位元
+                    $stock[5], //同比，百分比
+                    $stock[6], //环比，百分比
+                    $stock[7], //净利润，单位元
+                    $stock[8], //同比，百分比
+                    $stock[9], //环比，百分比
+                    $stock[10], //每股净资产
+                    $stock[11], //资产收益率，百分比
+                    $stock[12], //每股经营现金流量，百分比
+                    $stock[13], //销售毛利率，百分比
+                    $stock[15], //报告日期
+            ],
+            20170930 => [
+                    $stock[2], //每股收益
+                    $stock[4], //营业收入，单位元
+                    $stock[5], //同比，百分比
+                    $stock[6], //环比，百分比
+                    $stock[7], //净利润，单位元
+                    $stock[8], //同比，百分比
+                    $stock[9], //环比，百分比
+                    $stock[10], //每股净资产
+                    $stock[11], //资产收益率，百分比
+                    $stock[12], //每股经营现金流量，百分比
+                    $stock[13], //销售毛利率，百分比
+                    $stock[15], //报告日期
+            ],
+            ...
+        ]
+
+2、所有股票财务数据（全库）
+  结构：
+        hash
+  key：
+        stock_income  | Y（年度）
+  value：
+        二维数组，报告日期Ymd为子key
+        [
+            ...
+            sh600036 => [
+                    $stock[2], //每股收益
+                    $stock[4], //营业收入，单位元
+                    $stock[5], //同比，百分比
+                    $stock[6], //环比，百分比
+                    $stock[7], //净利润，单位元
+                    $stock[8], //同比，百分比
+                    $stock[9], //环比，百分比
+                    $stock[10], //每股净资产
+                    $stock[11], //资产收益率，百分比
+                    $stock[12], //每股经营现金流量，百分比
+                    $stock[13], //销售毛利率，百分比
+                    $stock[15], //报告日期
+            ],
+            sh600196 => [
+                    $stock[2], //每股收益
+                    $stock[4], //营业收入，单位元
+                    $stock[5], //同比，百分比
+                    $stock[6], //环比，百分比
+                    $stock[7], //净利润，单位元
+                    $stock[8], //同比，百分比
+                    $stock[9], //环比，百分比
+                    $stock[10], //每股净资产
+                    $stock[11], //资产收益率，百分比
+                    $stock[12], //每股经营现金流量，百分比
+                    $stock[13], //销售毛利率，百分比
+                    $stock[15], //报告日期
+            ],
+            ...
+        ]
+
+三、getFund
+
+1、获取板块资金流量（全库）
+  结构：
+        hash
+  key：
+        $bid_fund | Y（年度），$bid包含行业板块、概念板块
+  value：
+        二维数组，20171208为子key
+        [
+            ...
+            20171207 => [
+                    $boardArr[2],  //名称
+                    $boardArr[3], //涨跌幅
+                    $boardArr[4],  //全部净流入
+                    $boardArr[5],  //全部净流入比例
+                    $boardArr[6], //超大净流入
+                    $boardArr[7], //超大净流入比例
+                    $boardArr[8],  //大净流入
+                    $boardArr[9],  //大净流入比例
+                    $boardArr[10], //中净流入
+                    $boardArr[11], //中净流入比例
+                    $boardArr[12], //小净流入
+                    $boardArr[13], //小净流入比例
+            ],
+            20171208 => [
+                    $boardArr[2],  //名称
+                    $boardArr[3], //涨跌幅
+                    $boardArr[4],  //全部净流入
+                    $boardArr[5],  //全部净流入比例
+                    $boardArr[6], //超大净流入
+                    $boardArr[7], //超大净流入比例
+                    $boardArr[8],  //大净流入
+                    $boardArr[9],  //大净流入比例
+                    $boardArr[10], //中净流入
+                    $boardArr[11], //中净流入比例
+                    $boardArr[12], //小净流入
+                    $boardArr[13], //小净流入比例
+            ],
+            ...
+        ]
+
+2、单个股票的资金流量（全库）
+  结构：
+        hash
+  key：
+        $stockId_fund | Y（年度)
+  value：
+        二维数组，20171208为子key
+        [
+            ...
+            20171207 => [
+                    $boardArr[2],  //名称
+                    $boardArr[3], //涨跌幅
+                    $boardArr[4],  //全部净流入
+                    $boardArr[5],  //全部净流入比例
+                    $boardArr[6], //超大净流入
+                    $boardArr[7], //超大净流入比例
+                    $boardArr[8],  //大净流入
+                    $boardArr[9],  //大净流入比例
+                    $boardArr[10], //中净流入
+                    $boardArr[11], //中净流入比例
+                    $boardArr[12], //小净流入
+                    $boardArr[13], //小净流入比例
+            ],
+            20171208 => [
+                    $boardArr[2],  //名称
+                    $boardArr[3], //涨跌幅
+                    $boardArr[4],  //全部净流入
+                    $boardArr[5],  //全部净流入比例
+                    $boardArr[6], //超大净流入
+                    $boardArr[7], //超大净流入比例
+                    $boardArr[8],  //大净流入
+                    $boardArr[9],  //大净流入比例
+                    $boardArr[10], //中净流入
+                    $boardArr[11], //中净流入比例
+                    $boardArr[12], //小净流入
+                    $boardArr[13], //小净流入比例
+            ],
+            ...
+        ]
+
+四、getStockOutfit
+
+1、单个股票的机构评级
+  结构：
+        string
+  key：
+        $stockId_outfit
+  value：
+        二维数组
+        [
+            ...
+            0 => [
+                    $outfit['insName'], //名称
+                    $outfit['secuFullCode'],//strock
+                    $outfit['rate'], //rate
+                    $outfit['datetime'],  //日期
+            ],
+            1 => [
+                    $outfit['insName'], //名称
+                    $outfit['secuFullCode'],//strock
+                    $outfit['rate'], //rate
+                    $outfit['datetime'],  //日期
+            ],
+            ...
+        ]
+
+2、单个股票的机构持仓
+  结构：
+        string
+  key：
+        $stockId_outfitdirection
+  value：
+        二维数组，每个季度日期为key
+        [
+            ...
+            20170630 => [
+                   $stock['SName'], //股票名称
+                   $stock['SCode'], //股票ID
+                   $stock['Count'], //机构数
+                   $stock['ShareHDNum'], //持股总数
+                   $stock['VPosition'], //持股市值
+            ],
+            20170930 => [
+                   $stock['SName'], //股票名称
+                   $stock['SCode'], //股票ID
+                   $stock['Count'], //机构数
+                   $stock['ShareHDNum'], //持股总数
+                   $stock['VPosition'], //持股市值
+            ],
+            ...
+        ]
